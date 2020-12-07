@@ -157,7 +157,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -10}
   m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &296868307
@@ -318,7 +318,7 @@ MonoBehaviour:
   minAnimDuration: 0.7
   maxAnimDuration: 1.8
   easeType: 28
-  spread: 0.2
+  spread: 25
 --- !u!1 &907524555
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,7 +554,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Claim
 --- !u!222 &1210409602
 CanvasRenderer:
   m_ObjectHideFlags: 0

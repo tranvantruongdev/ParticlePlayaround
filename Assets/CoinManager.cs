@@ -75,11 +75,6 @@ public class CoinManager : MonoBehaviour
 		}
 	}
 
-	public void AddCoins(Vector3 collectedCoinPosition, int amount)
-	{
-		Animate(collectedCoinPosition, amount);
-	}
-
 	public void SpawmCoin()
     {
 		targetPosition = GameObject.FindGameObjectWithTag("Finish").transform.position;
