@@ -17,23 +17,23 @@ public class ParticleFollow : MonoBehaviour
 			//set target's position based on camera
 			//Vector3 targetPos = cam.ScreenToWorldPoint(new Vector3(target.position.x,
 			//	target.position.y, target.position.z * -1));
-		Vector3 targetPos = cam.ScreenToWorldPoint(new Vector3(target.position.x,
-				target.position.y, 0));
-		int numParticlesAlive = m_System.GetParticles(m_Particles);
-			for (int i = 0; i < numParticlesAlive; i++)
-			{
-				float ted = (targetPos - this.transform.position).sqrMagnitude + 0.001f;
-				Vector3 diff = targetPos - m_Particles[i].position;
-				float diffsqrm = diff.sqrMagnitude;
-				float face = Vector3.Dot(m_Particles[i].velocity.normalized, diff.normalized);
-				float f = Mathf.Abs((ted - diffsqrm) / ted) * ted * (face + 1.001f);
-				float t = 0;
-				t += Time.deltaTime;
-				m_Particles[i].velocity = Vector3.ClampMagnitude(
-					Vector3.Slerp(m_Particles[i].velocity, m_Particles[i].velocity + diff * 0.01f * f, t),
-					maxSpeed);
-			}
-			m_System.SetParticles(m_Particles, numParticlesAlive);
+		//Vector3 targetPos = cam.ScreenToWorldPoint(new Vector3(target.position.x,
+		//		target.position.y, 0));
+		//int numParticlesAlive = m_System.GetParticles(m_Particles);
+		//	for (int i = 0; i < numParticlesAlive; i++)
+		//	{
+		//		float ted = (targetPos - this.transform.position).sqrMagnitude + 0.001f;
+		//		Vector3 diff = targetPos - m_Particles[i].position;
+		//		float diffsqrm = diff.sqrMagnitude;
+		//		float face = Vector3.Dot(m_Particles[i].velocity.normalized, diff.normalized);
+		//		float f = Mathf.Abs((ted - diffsqrm) / ted) * ted * (face + 1.001f);
+		//		float t = 0;
+		//		t += Time.deltaTime;
+		//		m_Particles[i].velocity = Vector3.ClampMagnitude(
+		//			Vector3.Slerp(m_Particles[i].velocity, m_Particles[i].velocity + diff * 0.01f * f, t),
+		//			maxSpeed);
+		//	}
+		//	m_System.SetParticles(m_Particles, numParticlesAlive);
 	}
 
     // Start is called before the first frame update

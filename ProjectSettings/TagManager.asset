@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Coin
   - Ground
+  - ConfirmButton
+  - CoinMeter
   layers:
   - Default
   - TransparentFX
