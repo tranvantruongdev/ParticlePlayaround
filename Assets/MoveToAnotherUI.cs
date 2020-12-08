@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +11,9 @@ public class MoveToAnotherUI : MonoBehaviour
     RectTransform newPos;
     public GameObject animatedCoinPrefab;
     public Queue<GameObject> coinsQueue = new Queue<GameObject>();
+    [SerializeField]
+    private GameObject collectButton;
+    [SerializeField] Ease easeType;
 
     private void Awake()
     {
@@ -22,8 +25,7 @@ public class MoveToAnotherUI : MonoBehaviour
         GameObject coin;
         for (int i = 0; i < maxCoins; i++)
         {
-            coin = Instantiate(animatedCoinPrefab);
-            coin.transform.parent = transform;
+            coin = Instantiate(animatedCoinPrefab, Vector3.zero, Quaternion.identity, transform);
             coin.SetActive(false);
             coinsQueue.Enqueue(coin);
         }
@@ -38,18 +40,12 @@ public class MoveToAnotherUI : MonoBehaviour
             GameObject coin = coinsQueue.Dequeue();
             coin.SetActive(true);
 
-            if (coin.transform.position == newPos.position)
-            {
-                //executes whenever coin reach target position
-                coin.SetActive(false);
-                coin.transform.position = transform.position;
-                coinsQueue.Enqueue(coin);
-                return;
-            }
-        }
-    }
+            coin.transform.position = collectButton.transform.position;
 
-    void Start()
-    {
+            coin.transform.DOMove(newPos.position, 2).SetEase(easeType).OnComplete(() => {
+                coin.SetActive(false);
+                coinsQueue.Enqueue(coin);
+                });
+        }
     }
 }

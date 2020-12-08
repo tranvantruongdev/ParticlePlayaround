@@ -458,9 +458,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParticleSystem: {fileID: 0}
-  maxCoins: 5
+  maxCoins: 1
   newPos: {fileID: 1698375218}
   animatedCoinPrefab: {fileID: 2747595500477065965, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
+  collectButton: {fileID: 1693718168}
+  easeType: 3
 --- !u!1 &1449440350
 GameObject:
   m_ObjectHideFlags: 0
