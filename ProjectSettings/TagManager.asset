@@ -8,6 +8,12 @@ TagManager:
   - Ground
   - ConfirmButton
   - CoinMeter
+  - Red
+  - Blue
+  - Green
+  - ButtonRed
+  - ButtonGreen
+  - ButtonBlue
   layers:
   - Default
   - TransparentFX

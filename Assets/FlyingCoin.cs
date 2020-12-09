@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FlyingCoin : MonoBehaviour
 {
@@ -8,8 +6,9 @@ public class FlyingCoin : MonoBehaviour
 
 	private ParticleSystem system;
 
-	private static ParticleSystem.Particle[] particles = new ParticleSystem.Particle[1000];
+	private static ParticleSystem.Particle[] particles = new ParticleSystem.Particle[100];
 	int count;
+	Animation anim;
 
 	void Start()
 	{
@@ -20,11 +19,13 @@ public class FlyingCoin : MonoBehaviour
 		{
 			enabled = false;
 		}
+		anim = Target.gameObject.GetComponent<Animation>();
 	}
 
 	void LateUpdate()
 	{
 		count = system.GetParticles(particles);
+		bool timeToStop = false;
 
 		for (int i = 0; i < count; i++)
 		{
@@ -38,21 +39,28 @@ public class FlyingCoin : MonoBehaviour
             if (tarPosi.y < .1f)
             {
 				//set particle's lifetime to negative => remove particle from system
-                particle.remainingLifetime = -1f; 
+                particle.remainingLifetime = -1f;
+				timeToStop = true;
+				anim.Play();
             }
+			timeToStop = false;
             particle.position = system.transform.InverseTransformPoint((v2 - tarPosi) );
 			particles[i] = particle;
 		}
+        if (timeToStop)
+        {
+			enabled = false;
+        }
 		system.SetParticles(particles, count);
 	}
 
 	private void OnEnable()
     {
-        //particleSystem.Play();
+		system.Play();
     }
 
     private void OnDisable()
     {
-        //particleSystem.Clear();
+		system.Clear();
     }
 }

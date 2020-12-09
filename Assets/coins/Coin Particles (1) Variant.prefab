@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065962, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: InitialModule.startSize.scalar
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065962, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: ShapeModule.m_Scale.z
@@ -109,11 +109,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065962, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065962, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: InitialModule.startSpeed.scalar
       value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747595500477065962, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747595500477065962, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747595500477065962, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
+      propertyPath: ExternalForcesModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2747595500477065962, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
+      propertyPath: ExternalForcesModule.influenceList.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065963, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: m_AllowRoll
@@ -125,7 +141,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065963, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: m_MinParticleSize
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065963, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -145,15 +161,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065964, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065964, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065964, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2747595500477065964, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
       propertyPath: m_LocalRotation.w
