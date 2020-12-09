@@ -17,7 +17,7 @@ public class MoveToAnotherUI : MonoBehaviour
 
     private void Awake()
     {
-        PrepareCoins();
+        //PrepareCoins();
     }
 
     void PrepareCoins()
