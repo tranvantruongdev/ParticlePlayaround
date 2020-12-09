@@ -35,19 +35,14 @@ public class FlyingCoin : MonoBehaviour
 
 			Vector3 tarPosi = (v2 - v1) * (particle.remainingLifetime / particle.startLifetime);
 
-            //Debug.Log(tarPosi.ToString());
-
             if (tarPosi.y < .1f)
             {
-                //system.Clear();
-                //system.Stop(system);
-                //return;
-                particle.remainingLifetime = -1f; //set particle's lifetime to negative => remove particle from system
+				//set particle's lifetime to negative => remove particle from system
+                particle.remainingLifetime = -1f; 
             }
-            particle.position = system.transform.InverseTransformPoint(v2 - tarPosi);
+            particle.position = system.transform.InverseTransformPoint((v2 - tarPosi) );
 			particles[i] = particle;
 		}
-
 		system.SetParticles(particles, count);
 	}
 

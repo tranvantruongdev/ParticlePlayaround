@@ -202,6 +202,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 51932758}
   m_CullTransparentMesh: 0
+--- !u!114 &131576319 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7197275770203630262, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
+  m_PrefabInstance: {fileID: 1621534309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793ce361946a32f4288856a6ac63de6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &880686686
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,7 +651,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 141.22708, y: 281.00003}
+  m_AnchoredPosition: {x: 136.09155, y: 279.8864}
   m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &1593922233
@@ -1475,6 +1486,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 596927180009098432, guid: 0ceaca8e95d9bd947908eb396d64b493, type: 3}
   m_PrefabInstance: {fileID: 3344447841053880796}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1676078045 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5586717233055337626, guid: 0ceaca8e95d9bd947908eb396d64b493, type: 3}
+  m_PrefabInstance: {fileID: 3344447841053880796}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 793ce361946a32f4288856a6ac63de6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1693718168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1572,6 +1594,30 @@ MonoBehaviour:
       - m_Target: {fileID: 1676078043}
         m_TargetAssemblyTypeName: UnityEngine.ParticleSystem, UnityEngine
         m_MethodName: Play
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 131576319}
+        m_TargetAssemblyTypeName: FlyingCoin, Assembly-CSharp
+        m_MethodName: ResetTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1676078045}
+        m_TargetAssemblyTypeName: FlyingCoin, Assembly-CSharp
+        m_MethodName: ResetTime
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
