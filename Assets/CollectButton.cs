@@ -9,16 +9,8 @@ public class CollectButton : MonoBehaviour
 
     private bool ParticleAvailable(int index)
     {
-        if (index >= coin.Length)
-        {
-            return false;
-        }
-
-        if (!coin[index].system.isPlaying)
-        {
-            return true;
-        }
-
+        if (index >= coin.Length) return false;
+        if (!coin[index].system.isPlaying) return true;
         return false;
     }
 
@@ -32,28 +24,21 @@ public class CollectButton : MonoBehaviour
             {
                 if (!ParticleAvailable(i))
                 {
-                    if (i >= coin.Length)
-                    {
-                        return;
-                    }
+                    if (i >= coin.Length) return;
                     i += Target.Length;
                 }
-                else
-                {
-                    break;
-                }
+                else break;
             }
 
             coin[i].transform.position = transform.position;
             coin[i].Target = Target[j];
             coin[i].system.externalForces.AddInfluence(forceField[j]);
-            coin[i].system.GetComponent<Renderer>().material = material[j];
+            if (coin[i].system.TryGetComponent(out Renderer renderCom))
+                renderCom.material = material[j];
+
             coin[i].system.Play();
 
-            if (j >= Target.Length -1)
-            {
-                return;
-            }
+            if (j >= Target.Length - 1) return;
 
             j++;
         }
