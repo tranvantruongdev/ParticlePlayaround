@@ -2,6 +2,7 @@
 
 public class CollectButton : MonoBehaviour
 {
+    //Button should holds all info about particle for better performance
     public Transform[] Target;
     public ParticleSystemForceField[] forceField;
     public Material[] material;
@@ -18,6 +19,7 @@ public class CollectButton : MonoBehaviour
     {
         int j = 0;
 
+        //Loop to check for any free particle to avoid particle change destination when playing
         for (int i = 0; i < coin.Length; i++)
         {
             for (int k = 0; k < coin.Length; k++)
@@ -33,12 +35,12 @@ public class CollectButton : MonoBehaviour
             coin[i].transform.position = transform.position;
             coin[i].Target = Target[j];
             coin[i].system.externalForces.AddInfluence(forceField[j]);
-            if (coin[i].system.TryGetComponent(out Renderer renderCom))
+            if (coin[i].system.TryGetComponent(out Renderer renderCom)) //Prevent allocate fake null value
                 renderCom.material = material[j];
 
             coin[i].system.Play();
 
-            if (j >= Target.Length - 1) return;
+            if (j >= Target.Length - 1) return; //Should stop increasing value greater than index
 
             j++;
         }
