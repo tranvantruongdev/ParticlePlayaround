@@ -42,20 +42,20 @@ public class CollectButton : MonoBehaviour
                 {
                     return;
                 }
-
                 i += 2;
             }
-
             coin[i].transform.position = transform.position;
             coin[i].Target = Target[j];
             coin[i].system.externalForces.AddInfluence(forceField[j]);
             coin[i].system.GetComponent<Renderer>().material = material[j];
             coin[i].system.Play();
 
-            if (j < 1)
+            if (j >= 1)
             {
-                j++;
+                return;
             }
+
+            j++;
         }
     }
 }
