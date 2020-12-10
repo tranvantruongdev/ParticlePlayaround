@@ -36,21 +36,29 @@ public class CollectButton : MonoBehaviour
 
         for (int i = 0; i < coin.Length; i++)
         {
-            while (!ParticleAvailable(i))
+            for (int k = 0; k < coin.Length; k++)
             {
-                if (i >= coin.Length)
+                if (!ParticleAvailable(i))
                 {
-                    return;
+                    if (i >= coin.Length)
+                    {
+                        return;
+                    }
+                    i += Target.Length;
                 }
-                i += 2;
+                else
+                {
+                    break;
+                }
             }
+
             coin[i].transform.position = transform.position;
             coin[i].Target = Target[j];
             coin[i].system.externalForces.AddInfluence(forceField[j]);
             coin[i].system.GetComponent<Renderer>().material = material[j];
             coin[i].system.Play();
 
-            if (j >= 1)
+            if (j >= Target.Length -1)
             {
                 return;
             }
