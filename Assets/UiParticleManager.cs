@@ -15,9 +15,12 @@ public class UiParticleManager : MonoBehaviour
 
     private void PrepareParticle()
     {
-        GameObject particle = Instantiate(uniformParticle, transform.position,
-            Quaternion.identity, gameObject.transform);
-        //particle.SetActive(false);
-        uniformParticlePool.Enqueue(particle);
+        GameObject particle;
+        for (int i = 0; i < maxParticle; i++)
+        {
+            particle = Instantiate(uniformParticle, transform.position,
+                Quaternion.identity, gameObject.transform);
+            uniformParticlePool.Enqueue(particle);
+        }
     }
 }

@@ -20,6 +20,11 @@ public class FlyingCoin : MonoBehaviour
 
     void LateUpdate()
     {
+        if (Target==null)
+        {
+            return;
+        }
+
         anim = Target.gameObject.GetComponent<Animation>();
         count = system.GetParticles(particles);
 

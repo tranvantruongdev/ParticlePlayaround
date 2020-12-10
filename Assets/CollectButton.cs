@@ -4,29 +4,58 @@ using UnityEngine;
 
 public class CollectButton : MonoBehaviour
 {
-    public Transform Target;
-    public ParticleSystemForceField forceField;
-    public Material material;
-    private FlyingCoin coin;
+    public Transform[] Target;
+    public ParticleSystemForceField[] forceField;
+    public Material[] material;
+    private FlyingCoin[] coin;
 
     // Start is called before the first frame update
     void Start()
     {
-        coin = FindObjectOfType<FlyingCoin>();
+        coin = FindObjectsOfType<FlyingCoin>();
+    }
+
+    private bool ParticleAvailable(int index)
+    {
+        if (index >= coin.Length)
+        {
+            return false;
+        }
+
+        if (!coin[index].system.isPlaying)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     public void Click()
     {
-        coin.transform.position = transform.position;
-        coin.Target = Target;
-        coin.system.externalForces.AddInfluence(forceField);
-        coin.system.GetComponent<Renderer>().material = material;
-        coin.system.Play();
-    }
+        int j = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < coin.Length; i++)
+        {
+            while (!ParticleAvailable(i))
+            {
+                if (i >= coin.Length)
+                {
+                    return;
+                }
+
+                i += 2;
+            }
+
+            coin[i].transform.position = transform.position;
+            coin[i].Target = Target[j];
+            coin[i].system.externalForces.AddInfluence(forceField[j]);
+            coin[i].system.GetComponent<Renderer>().material = material[j];
+            coin[i].system.Play();
+
+            if (j < 1)
+            {
+                j++;
+            }
+        }
     }
 }

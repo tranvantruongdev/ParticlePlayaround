@@ -158,7 +158,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 227.00002, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &51932760
 MonoBehaviour:
@@ -262,7 +262,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
+    m_NormalColor: {r: 0.9607844, g: 0.9607844, b: 0.9607844, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -347,9 +347,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3799d61b31dbe4095bed95c8c63632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 1763279758}
-  forceField: {fileID: 1763279760}
-  material: {fileID: 2100000, guid: c3116de55d4bc47478977e41d2f02492, type: 2}
+  Target:
+  - {fileID: 1698375218}
+  - {fileID: 1763279758}
+  forceField:
+  - {fileID: 1698375222}
+  - {fileID: 1763279760}
+  material:
+  - {fileID: 2100000, guid: daf76316ed978d84b9a86bc6b9732674, type: 2}
+  - {fileID: 2100000, guid: c3116de55d4bc47478977e41d2f02492, type: 2}
 --- !u!1 &880686686
 GameObject:
   m_ObjectHideFlags: 0
@@ -464,7 +470,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 227.00002, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &897941210
 MonoBehaviour:
@@ -479,7 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.23218822, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.0327414, g: 0.14150941, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -687,6 +693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741e0439f5092164b88390ebec5c553b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxParticle: 10
   uniformParticle: {fileID: 2747595500477065965, guid: a6fbd5b6b598d7b45906bba6f5eb0188, type: 3}
 --- !u!1 &1449440350
 GameObject:
@@ -970,9 +977,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d3799d61b31dbe4095bed95c8c63632, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 1698375218}
-  forceField: {fileID: 1698375222}
-  material: {fileID: 2100000, guid: daf76316ed978d84b9a86bc6b9732674, type: 2}
+  Target:
+  - {fileID: 1698375218}
+  - {fileID: 1763279758}
+  forceField:
+  - {fileID: 1698375222}
+  - {fileID: 1763279760}
+  material:
+  - {fileID: 2100000, guid: daf76316ed978d84b9a86bc6b9732674, type: 2}
+  - {fileID: 2100000, guid: c3116de55d4bc47478977e41d2f02492, type: 2}
 --- !u!1 &1698375217
 GameObject:
   m_ObjectHideFlags: 0
