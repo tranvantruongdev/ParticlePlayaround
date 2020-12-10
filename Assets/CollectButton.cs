@@ -1,19 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CollectButton : MonoBehaviour
 {
     public Transform[] Target;
     public ParticleSystemForceField[] forceField;
     public Material[] material;
-    private FlyingCoin[] coin;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        coin = FindObjectsOfType<FlyingCoin>();
-    }
+    public FlyingCoin[] coin;
 
     private bool ParticleAvailable(int index)
     {
