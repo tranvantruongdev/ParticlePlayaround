@@ -2,7 +2,7 @@
 
 public class FlyingCoin : MonoBehaviour
 {
-    public Transform Target;
+    public Transform target;
 
     public ParticleSystem system;
 
@@ -20,12 +20,12 @@ public class FlyingCoin : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Target==null)
+        if (target == null)
         {
             return;
         }
 
-        anim = Target.gameObject.GetComponent<Animation>();
+        anim = target.gameObject.GetComponent<Animation>();
         count = system.GetParticles(particles);
 
         for (int i = 0; i < count; i++)
@@ -33,11 +33,11 @@ public class FlyingCoin : MonoBehaviour
             ParticleSystem.Particle particle = particles[i];
 
             Vector3 v1 = system.transform.TransformPoint(particle.position);
-            Vector3 v2 = Target.transform.position;
+            Vector3 v2 = target.transform.position;
 
             Vector3 tarPosi = (v2 - v1) * (particle.remainingLifetime / particle.startLifetime);
 
-            //if (tarPosi.y < .1f)
+            //if (Vector3.Distance(tarPosi, v2) < .2f)
             //{
             //    //set particle's lifetime to negative => remove particle from system
             //    particle.remainingLifetime = -1f;
@@ -48,6 +48,5 @@ public class FlyingCoin : MonoBehaviour
             particles[i] = particle;
         }
         system.SetParticles(particles, count);
-        Debug.Log(Target.position.ToString());
     }
 }

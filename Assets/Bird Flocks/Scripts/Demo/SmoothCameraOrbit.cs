@@ -53,7 +53,7 @@ public class SmoothCameraOrbit : MonoBehaviour
         //If there is no target, create a temporary target at 'distance' from the cameras current viewpoint
         if (!target)
         {
-            GameObject go = new GameObject("Cam Target");
+            GameObject go = new GameObject("Cam target");
             go.transform.position = transform.position + (transform.forward * distance);
             target = go.transform;
         }

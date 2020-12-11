@@ -44,7 +44,7 @@ public class Destination : MonoBehaviour
 			Vector3 v1 =system.transform.TransformPoint(particle.position);
             //Vector3 v1 =system.transform.TransformPoint(particle.position);
             Vector3 v2 = Target.transform.position;
-            //Vector3 v2 = Target.transform.position;
+            //Vector3 v2 = target.transform.position;
 
 
             Vector3 tarPosi = (v2 - v1) * (particle.remainingLifetime / particle.startLifetime);

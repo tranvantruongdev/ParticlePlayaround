@@ -221,7 +221,7 @@ namespace UnityEngine.UI.Extensions
 //            if (LerpToTarget && LerpCurve.length < 2)
 //            {
 //                LerpToTarget = false;
-//                Debug.LogError("You need to define a Lerp Curve to enable 'Lerp To Target'");
+//                Debug.LogError("You need to define a Lerp Curve to enable 'Lerp To target'");
 //            }
 //        }
 //#endif

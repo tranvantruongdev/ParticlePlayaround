@@ -77,7 +77,7 @@ public class TestPar : MonoBehaviour
                     }
 
                     Coin[i].transform.position = Btn[1].transform.position;
-                    Coin[i].Target = Target[1];
+                    Coin[i].target = Target[1];
                     Coin[i].system.externalForces.AddInfluence(forceField[1]);
 
                     if (Coin[i].system.TryGetComponent(out Renderer renderCom)) //Prevent allocate fake null value
@@ -104,7 +104,7 @@ public class TestPar : MonoBehaviour
                     }
 
                     Coin[i].transform.position = Btn[0].transform.position;
-                    Coin[i].Target = Target[j];
+                    Coin[i].target = Target[j];
                     Coin[i].system.externalForces.AddInfluence(forceField[j]);
 
                     if (Coin[i].system.TryGetComponent(out Renderer renderCom)) //Prevent allocate fake null value

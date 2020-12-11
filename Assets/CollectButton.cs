@@ -33,7 +33,7 @@ public class CollectButton : MonoBehaviour
             }
 
             coin[i].transform.position = transform.position;
-            coin[i].Target = Target[j];
+            coin[i].target = Target[j];
             coin[i].system.externalForces.AddInfluence(forceField[j]);
 
             if (coin[i].system.TryGetComponent(out Renderer renderCom)) //Prevent allocate fake null value

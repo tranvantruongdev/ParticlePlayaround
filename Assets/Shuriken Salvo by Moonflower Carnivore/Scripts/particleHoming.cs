@@ -2,7 +2,7 @@
 using UnityEngine;
 [ExecuteInEditMode]
 public class particleHoming : MonoBehaviour {
-	[Tooltip("Target object. If this parameter is undefined it will assume the attached object itself which creates self chasing particle effect.")]
+	[Tooltip("target object. If this parameter is undefined it will assume the attached object itself which creates self chasing particle effect.")]
 	public Transform target;
 	[Tooltip("How fast the particle is guided to the closest target.")]
 	public float speed = 10f;

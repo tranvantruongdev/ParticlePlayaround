@@ -5927,8 +5927,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793ce361946a32f4288856a6ac63de6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 1791712706}
-  system: {fileID: 649872309}
+  Target: {fileID: 0}
+  system: {fileID: 0}
 --- !u!199 &649872308
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -6009,9 +6009,9 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   useRigidbodyForVelocity: 1
@@ -17184,7 +17184,6 @@ MonoBehaviour:
   Target: {fileID: 1791712705}
   Btn:
   - {fileID: 847946838}
-  cam: {fileID: 0}
 --- !u!4 &1656855064
 Transform:
   m_ObjectHideFlags: 0

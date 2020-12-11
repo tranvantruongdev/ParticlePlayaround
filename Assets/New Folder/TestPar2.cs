@@ -26,9 +26,9 @@ public class TestPar2 : MonoBehaviour
     void click(Button btn)
     {
         Coin.transform.position = btn.transform.position;
-        Coin.Target = Target.transform;
-        Debug.Log(Coin.Target.transform.position.ToString());
-        //forceField = Target.gameObject.GetComponentInChildren<ParticleSystemForceField>();
+        Coin.target = Target.transform;
+        Debug.Log(Coin.target.transform.position.ToString());
+        //forceField = target.gameObject.GetComponentInChildren<ParticleSystemForceField>();
         //Coin.system.externalForces.AddInfluence(forceField);
         Coin.system.Play();
     }

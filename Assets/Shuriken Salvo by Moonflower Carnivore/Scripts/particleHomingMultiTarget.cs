@@ -3,7 +3,7 @@ using System.Linq;
 //using System.Collections;
 [ExecuteInEditMode]
 public class particleHomingMultiTarget : MonoBehaviour {
-	[Tooltip("Target objects. If this parameter is undefined it will assume the attached object itself which creates self chasing particle effect.")]
+	[Tooltip("target objects. If this parameter is undefined it will assume the attached object itself which creates self chasing particle effect.")]
 	public Transform[] target;
 	[Tooltip("How fast the particle is guided to the index target.")]
 	public float speed = 10f;
