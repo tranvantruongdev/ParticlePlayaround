@@ -23,15 +23,33 @@ public class UiParticlesController : MonoBehaviour
 
     private void Start()
     {
-        int num = 1;
-        //cant use normal for to seach for button -> need to figure out
+        //int num = 1;
+        ////Cant use normal for to seach for button -> need to figure out
+        //foreach (Button item in btn)
+        //{
+        //    item.onClick.AddListener(() => Click(item, num));
+        //    num++;
+        //}
+
         foreach (Button item in btn)
         {
-            item.onClick.AddListener(() =>
-            {
-                Click(item, num);
-            });
-            num++;
+            item.onClick.AddListener(() => Click(item));
+        }
+    }
+
+    private void OnDestroy()
+    {
+        //int num = 1;
+        ////Remove listener on each button
+        //foreach (Button item in btn)
+        //{
+        //    item.onClick.RemoveListener(() => Click(item, num));
+        //    num++;
+        //}
+
+        foreach (Button item in btn)
+        {
+            item.onClick.RemoveListener(() => Click(item));
         }
     }
 
@@ -42,33 +60,46 @@ public class UiParticlesController : MonoBehaviour
         return false;
     }
 
-    void Click(Button btn, int numberOfTarget)
+    void Click(Button btn)
     {
         int j = 0;
-        //Loop to check for any free particle to avoid particle change destination when playing
+        int emitedParticle = 0;
+
         for (int i = 0; i < coin.Length; i++)
         {
-            for (int k = 0; k < coin.Length; k++)
-            {
-                if (!ParticleAvailable(i))
-                {
-                    if (i >= coin.Length) return;
-                    i += numberOfTarget;
-                }
-                else break;
-            }
+            //Enough particle aldready
+            //if (emitedParticle >= numberOfTarget)
+            //{
+            //    return;
+            //}
+
+            //Loop to check for any free particle to avoid particle change destination when playing
+            //for (int k = 0; k < coin.Length; k++)
+            //{
+            //    if (!ParticleAvailable(i))
+            //    {
+            //        if (i >= coin.Length) return;
+            //        //i += numberOfTarget;
+            //        i += target.Length;
+            //    }
+            //    else break;
+            //}
 
             coin[i].transform.position = btn.transform.position;
             coin[i].target = target[j].transform;
             coin[i].system.externalForces.AddInfluence(forceField[j]);
 
-            if (coin[i].TryGetComponent(out UIParticleSystem renderCom)) //Prevent allocate fake null value
+            //Prevent allocate fake null value
+            if (coin[i].TryGetComponent(out UIParticleSystem renderCom))
                 renderCom.material = particleMaterial[j];
 
-            
+            //Add count value to track number of particle so that wont spam greater number particle than target number
+            emitedParticle++;
+
             coin[i].uiParticleSystem.StartParticleEmission();
 
-            if (j >= target.Length - 1) return; //Should stop increasing value greater than index
+            //Should stop increasing value greater than index
+            if (j >= target.Length - 1) return;
 
             j++;
         }

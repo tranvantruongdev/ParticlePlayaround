@@ -1,14 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.UI.Extensions;
+using System;
 
 public class FlyingCoin : MonoBehaviour
 {
+    [NonSerialized]
     public Transform target;
+    [NonSerialized]
     public ParticleSystem system;
-    private static ParticleSystem.Particle[] particles = new ParticleSystem.Particle[5];
+    [NonSerialized]
     public UIParticleSystem uiParticleSystem;
-    private int count;
 
+    private int count;
+    private static ParticleSystem.Particle[] particles = new ParticleSystem.Particle[5];
     private Animator anim;
 
     void Start()
