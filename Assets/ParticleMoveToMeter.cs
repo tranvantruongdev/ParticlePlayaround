@@ -10,25 +10,29 @@ public class ParticleMoveToMeter : MonoBehaviour
     [SerializeField] private GameObject uiParticle;
     [SerializeField] private Button[] buttons;
     [SerializeField] private GameObject[] target;
-    [SerializeField] private int maxParticle;
+    [SerializeField] private int maxParticleInPool;
+    [SerializeField] private Ease ease;
+    [Range(1, 100)]
+    [SerializeField] private int numberParticle;
+    [SerializeField] private Material[] particleMaterial;
 
     private Queue<GameObject> uiParticlePool = new Queue<GameObject>();
 
     private void Awake()
     {
-        PrepareParticle();
+        //PrepareParticle();
     }
 
-    private void PrepareParticle()
-    {
-        for (int i = 0; i < maxParticle; i++)
-        {
-            GameObject particle;
-            particle = Instantiate(uiParticle, transform);
-            particle.SetActive(false);
-            uiParticlePool.Enqueue(particle);
-        }
-    }
+    //private void PrepareParticle()
+    //{
+    //    for (int i = 0; i < maxParticleInPool; i++)
+    //    {
+    //        GameObject particle;
+    //        particle = Instantiate(uiParticle, transform);
+    //        particle.SetActive(false);
+    //        uiParticlePool.Enqueue(particle);
+    //    }
+    //}
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +57,11 @@ public class ParticleMoveToMeter : MonoBehaviour
 
     public void ClickEmitParticle(Button btn)
     {
+        if (!CheckUiParticle())
+        {
+            AddUiParticle(target.Length - uiParticlePool.Count);
+        }
+
         for (int j = 0; j < target.Length; j++)
         {
             if (uiParticlePool.Count > 0)
@@ -60,16 +69,16 @@ public class ParticleMoveToMeter : MonoBehaviour
                 int x = j;
                 GameObject particle = uiParticlePool.Dequeue();
                 particle.SetActive(true);
-
-                Coffee.UIExtensions.UIParticle uIParticles = particle.GetComponent<Coffee.UIExtensions.UIParticle>();
-                uIParticles.Play();
-                if (target[j].TryGetComponent(out ParticleSystemForceField particleSystemForceField))
-                {
-                    particle.GetComponentInChildren<ParticleSystem>()
-                        .externalForces.AddInfluence(particleSystemForceField);
-                }
+                var mainParticle = particle.GetComponentInChildren<ParticleSystem>().main;
+                mainParticle.maxParticles = numberParticle;
                 particle.transform.position = btn.transform.position;
-                particle.transform.DOMove(target[j].transform.position, 1).SetEase(Ease.OutQuad)
+                if (particle.TryGetComponent(out Coffee.UIExtensions.UIParticle uIParticle))
+                {
+                    uIParticle.material = particleMaterial[x];
+                    uIParticle.Play();
+                }
+                particle.transform.DOMove(target[j].transform.position, 1, true)
+                .SetEase(ease)
                 .OnComplete(() =>
                 {
                     if (target[x].TryGetComponent(out Animator animator))
@@ -81,5 +90,21 @@ public class ParticleMoveToMeter : MonoBehaviour
                 });
             }
         }
+    }
+
+    private void AddUiParticle(int amout)
+    {
+        for (int i = 0; i < amout; i++)
+        {
+            GameObject particle;
+            particle = Instantiate(uiParticle, transform);
+            particle.SetActive(false);
+            uiParticlePool.Enqueue(particle);
+        }
+    }
+
+    private bool CheckUiParticle()
+    {
+        return uiParticlePool.Count >= target.Length;
     }
 }
