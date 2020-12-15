@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class UiParticleManager : MonoBehaviour
 {
+#pragma warning disable 0649
     public int maxParticle = 2;
 
     [SerializeField] private GameObject uniformParticle;

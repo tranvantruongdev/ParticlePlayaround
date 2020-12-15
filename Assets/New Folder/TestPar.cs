@@ -60,67 +60,67 @@ public class TestPar : MonoBehaviour
 
     public void Click(string tag)
     {
-        switch (tag)
-        {
-            case "BtnGold":
-                //Loop to check for any free particle to avoid particle change destination when playing
-                for (int i = 0; i < Coin.Length; i++)
-                {
-                    for (int k = 0; k < Coin.Length; k++)
-                    {
-                        if (!ParticleAvailable(i))
-                        {
-                            if (i >= Coin.Length - 1) return;
-                            i += 1;
-                        }
-                        else break;
-                    }
+        //switch (tag)
+        //{
+        //    case "BtnGold":
+        //        //Loop to check for any free particle to avoid particle change destination when playing
+        //        for (int i = 0; i < Coin.Length; i++)
+        //        {
+        //            for (int k = 0; k < Coin.Length; k++)
+        //            {
+        //                if (!ParticleAvailable(i))
+        //                {
+        //                    if (i >= Coin.Length - 1) return;
+        //                    i += 1;
+        //                }
+        //                else break;
+        //            }
 
-                    Coin[i].transform.position = Btn[1].transform.position;
-                    Coin[i].target = Target[1];
-                    Coin[i].system.externalForces.AddInfluence(forceField[1]);
+        //            Coin[i].transform.position = Btn[1].transform.position;
+        //            Coin[i].target = Target[1];
+        //            Coin[i].system.externalForces.AddInfluence(forceField[1]);
 
-                    if (Coin[i].system.TryGetComponent(out Renderer renderCom)) //Prevent allocate fake null value
-                        renderCom.material = particleMaterial[1];
+        //            if (Coin[i].system.TryGetComponent(out Renderer renderCom)) //Prevent allocate fake null value
+        //                renderCom.material = particleMaterial[1];
 
-                    Coin[i].system.Play();
-                    break;
-                }
-                break;
+        //            Coin[i].system.Play();
+        //            break;
+        //        }
+        //        break;
 
-            case "BtnWolfnGold":
-                int j = 0;
-                //Loop to check for any free particle to avoid particle change destination when playing
-                for (int i = 0; i < Coin.Length; i++)
-                {
-                    for (int k = 0; k < Coin.Length; k++)
-                    {
-                        if (!ParticleAvailable(i))
-                        {
-                            if (i >= Coin.Length) return;
-                            i += Target.Length;
-                        }
-                        else break;
-                    }
+        //    case "BtnWolfnGold":
+        //        int j = 0;
+        //        //Loop to check for any free particle to avoid particle change destination when playing
+        //        for (int i = 0; i < Coin.Length; i++)
+        //        {
+        //            for (int k = 0; k < Coin.Length; k++)
+        //            {
+        //                if (!ParticleAvailable(i))
+        //                {
+        //                    if (i >= Coin.Length) return;
+        //                    i += Target.Length;
+        //                }
+        //                else break;
+        //            }
 
-                    Coin[i].transform.position = Btn[0].transform.position;
-                    Coin[i].target = Target[j];
-                    Coin[i].system.externalForces.AddInfluence(forceField[j]);
+        //            Coin[i].transform.position = Btn[0].transform.position;
+        //            Coin[i].target = Target[j];
+        //            Coin[i].system.externalForces.AddInfluence(forceField[j]);
 
-                    if (Coin[i].system.TryGetComponent(out Renderer renderCom)) //Prevent allocate fake null value
-                        renderCom.material = particleMaterial[j];
+        //            if (Coin[i].system.TryGetComponent(out Renderer renderCom)) //Prevent allocate fake null value
+        //                renderCom.material = particleMaterial[j];
 
-                    Coin[i].system.Play();
+        //            Coin[i].system.Play();
 
-                    if (j >= Target.Length - 1) return; //Should stop increasing value greater than index
+        //            if (j >= Target.Length - 1) return; //Should stop increasing value greater than index
 
-                    j++;
-                }
-                break;
+        //            j++;
+        //        }
+        //        break;
 
-            default:
-                Debug.Log("There is no tag: " + tag);
-                break;
-        }
+        //    default:
+        //        Debug.Log("There is no tag: " + tag);
+        //        break;
+        //}
     }
 }
