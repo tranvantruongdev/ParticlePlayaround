@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -20,7 +18,6 @@ public class ParticleMoveToMeter : MonoBehaviour
 
     void Start()
     {
-
         for (int i = 0; i < buttons.Length; i++)
         {
             //get closure value from for loop and pass to anonymous lamda function
@@ -93,8 +90,8 @@ public class ParticleMoveToMeter : MonoBehaviour
                 .SetEase(uiParticleStruct.Ease)
                 .OnComplete(() =>
                 {
-                    if (target[x].TryGetComponent(out Animator animator))
-                        animator.SetTrigger("pop");
+                    if (target[x].TryGetComponent(out Animation animation))
+                        animation.Play();
 
                     particle.SetActive(false);
                     uiParticleStruct.UiParticlePool.Enqueue(particle);
