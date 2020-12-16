@@ -234,9 +234,9 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
-  m_CullingType: 1
+  m_CullingType: 0
 --- !u!114 &510237895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -383,9 +383,9 @@ Animation:
   m_Animations:
   - {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
-  m_CullingType: 1
+  m_CullingType: 0
 --- !u!1 &821082036
 GameObject:
   m_ObjectHideFlags: 0
