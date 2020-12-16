@@ -12,21 +12,35 @@ public class ParticleMoveToMeter : MonoBehaviour
     [SerializeField] private GameObject uiParticle;
     [SerializeField] private Button[] buttons;
     [SerializeField] private GameObject[] target;
-    [SerializeField] private Ease ease = Ease.OutQuad;
-    [Range(1, 100)]
-    [SerializeField] private int numberParticle = 5;
     [SerializeField] private Material[] particleMaterial;
-    [SerializeField] private float duration = 1f;
 
-    private readonly Queue<GameObject> uiParticlePool = new Queue<GameObject>();
+    private UiParticleStruct uiParticleStruct = new UiParticleStruct(
+        Ease.OutQuad, 5, 1, 300, new Queue<GameObject>()
+        );
 
     void Start()
     {
+
         for (int i = 0; i < buttons.Length; i++)
         {
             //get closure value from for loop and pass to anonymous lamda function
             int x = i;
             buttons[x].onClick.AddListener(() => ClickEmitParticle(buttons[x]));
+        }
+
+        InvokeRepeating(nameof(CleanUiParticleOvertime),
+            uiParticleStruct.CleaningInterval, uiParticleStruct.CleaningInterval);
+    }
+
+    void CleanUiParticleOvertime()
+    {
+        for (int i = 0; i < uiParticleStruct.UiParticlePool.Count; i++)
+        {
+            var uiParticle = uiParticleStruct.UiParticlePool.Dequeue();
+            if (uiParticle.activeSelf == false)
+            {
+                Destroy(uiParticle);
+            }
         }
     }
 
@@ -45,17 +59,17 @@ public class ParticleMoveToMeter : MonoBehaviour
         //create some UiParticle if dont have enough
         if (!CheckUiParticle())
         {
-            AddUiParticle(target.Length - uiParticlePool.Count);
+            AddUiParticle(target.Length - uiParticleStruct.UiParticlePool.Count);
         }
 
         for (int j = 0; j < target.Length; j++)
         {
-            if (uiParticlePool.Count > 0)
+            if (uiParticleStruct.UiParticlePool.Count > 0)
             {
                 //get closure value from for loop and pass to anonymous lamda function
                 int x = j;
 
-                GameObject particle = uiParticlePool.Dequeue();
+                GameObject particle = uiParticleStruct.UiParticlePool.Dequeue();
                 particle.SetActive(true);
 
                 particle.transform.position = btn.transform.position;
@@ -66,7 +80,7 @@ public class ParticleMoveToMeter : MonoBehaviour
                     List<ParticleSystem> listUiParticles = uIParticle.particles;
 
                     ParticleSystem.MainModule uiParticleMain = listUiParticles[0].main;
-                    uiParticleMain.maxParticles = numberParticle;
+                    uiParticleMain.maxParticles = uiParticleStruct.NumberParticle;
 
                     if (listUiParticles[0].TryGetComponent(out ParticleSystemRenderer particleSystemRenderer))
                         particleSystemRenderer.material = particleMaterial[x];
@@ -75,15 +89,15 @@ public class ParticleMoveToMeter : MonoBehaviour
                 }
 
                 //move uiParticle object to target position within duration time with ease type
-                particle.transform.DOMove(target[j].transform.position, duration)
-                .SetEase(ease)
+                particle.transform.DOMove(target[j].transform.position, uiParticleStruct.Duration)
+                .SetEase(uiParticleStruct.Ease)
                 .OnComplete(() =>
                 {
                     if (target[x].TryGetComponent(out Animator animator))
                         animator.SetTrigger("pop");
 
                     particle.SetActive(false);
-                    uiParticlePool.Enqueue(particle);
+                    uiParticleStruct.UiParticlePool.Enqueue(particle);
                 });
             }
         }
@@ -96,12 +110,12 @@ public class ParticleMoveToMeter : MonoBehaviour
             GameObject particle;
             particle = Instantiate(uiParticle, transform);
             particle.SetActive(false);
-            uiParticlePool.Enqueue(particle);
+            uiParticleStruct.UiParticlePool.Enqueue(particle);
         }
     }
 
     private bool CheckUiParticle()
     {
-        return uiParticlePool.Count >= target.Length;
+        return uiParticleStruct.UiParticlePool.Count >= target.Length;
     }
 }
