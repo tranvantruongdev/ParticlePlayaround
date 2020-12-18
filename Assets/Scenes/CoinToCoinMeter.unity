@@ -815,12 +815,19 @@ MonoBehaviour:
     - {fileID: 1424648133}
     - {fileID: 1264807300}
     uiParticle: {fileID: 4550346771492195429, guid: 6ea5c25ce7065e348a379b34e07d8c44, type: 3}
+    uiPressedParticle: {fileID: 434248333861267494, guid: 5faed9c6c201bd1449ee2f0d252126d3, type: 3}
     target:
     - {fileID: 646589615}
     - {fileID: 510237893}
     particleMaterial:
     - {fileID: 2100000, guid: daf76316ed978d84b9a86bc6b9732674, type: 2}
     - {fileID: 2100000, guid: 4e7f599f1a240fc49879c79707f33360, type: 2}
+    ease: 6
+    numberParticle: 5
+    numberPrewarmParticle: 1
+    duration: 1
+    cleaningInterval: 5
+    spread: 0
 --- !u!1 &1424648129
 GameObject:
   m_ObjectHideFlags: 0

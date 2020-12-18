@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Lean.Pool;
 using UnityEngine;
 
 public class UiParticleManager : MonoBehaviour
@@ -7,7 +6,7 @@ public class UiParticleManager : MonoBehaviour
 #pragma warning disable 0649
     public int maxParticle = 2;
 
-    [SerializeField] private GameObject uniformParticle;
+   // [SerializeField] private GameObject uniformParticle;
 
     private void Awake()
     {
@@ -18,8 +17,8 @@ public class UiParticleManager : MonoBehaviour
     {
         for (int i = 0; i < maxParticle; i++)
         {
-            LeanPool.Spawn(uniformParticle, transform.position,
-                Quaternion.identity, gameObject.transform);
+            //LeanPool.Spawn(uniformParticle, transform.position,
+            //    Quaternion.identity, gameObject.transform);
         }
     }
 }

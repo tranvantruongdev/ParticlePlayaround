@@ -14,6 +14,13 @@ public class ParticleMoveToMeter : MonoBehaviour
     private void Start()
     {
         uiParticleStruct.UiParticlePool = new Queue<GameObject>();
+        uiParticleStruct.UiPressedParticlePool = new Queue<GameObject>();
+
+        //prewarm some uiParticle
+        AddUiParticle(uiParticleStruct.NumberPrewarmParticle);
+
+        //prewarm some uiPressedParticle
+        AddUiPressedParticle(uiParticleStruct.NumberPrewarmParticle);
 
         for (int i = 0; i < uiParticleStruct.Buttons.Length; i++)
         {
@@ -28,10 +35,22 @@ public class ParticleMoveToMeter : MonoBehaviour
 
     private void CleanUiParticleOvertime()
     {
-        for (int i = 0; i < uiParticleStruct.UiParticlePool.Count; i++)
+        GameObject uiParticle;
+        int loopTimes = uiParticleStruct.UiParticlePool.Count;
+        for (int i = 1; i < loopTimes; i++)
         {
-            var uiParticle = uiParticleStruct.UiParticlePool.Dequeue();
-            if (uiParticle.activeSelf == false)
+            uiParticle = uiParticleStruct.UiParticlePool.Dequeue();
+            if (!uiParticle.activeInHierarchy)
+            {
+                Destroy(uiParticle);
+            }
+        }
+
+        int loopTimes2 = uiParticleStruct.UiPressedParticlePool.Count;
+        for (int i = 1; i < loopTimes2; i++)
+        {
+            uiParticle = uiParticleStruct.UiPressedParticlePool.Dequeue();
+            if (!uiParticle.activeInHierarchy)
             {
                 Destroy(uiParticle);
             }
@@ -56,6 +75,20 @@ public class ParticleMoveToMeter : MonoBehaviour
             AddUiParticle(uiParticleStruct.Target.Length - uiParticleStruct.UiParticlePool.Count);
         }
 
+        if (uiParticleStruct.UiPressedParticlePool.Count < 1)
+        {
+            AddUiPressedParticle(1);
+        }
+
+        GameObject pressParticle = uiParticleStruct.UiPressedParticlePool.Dequeue();
+        pressParticle.SetActive(true);
+
+        pressParticle.transform.position = btn.transform.position;
+
+        //set number particle to emit, material display and play it
+        if (pressParticle.TryGetComponent(out Coffee.UIExtensions.UIParticle uIPressedParticle))
+            uIPressedParticle.Play();
+
         for (int j = 0; j < uiParticleStruct.Target.Length; j++)
         {
             if (uiParticleStruct.UiParticlePool.Count > 0)
@@ -75,6 +108,15 @@ public class ParticleMoveToMeter : MonoBehaviour
 
                     ParticleSystem.MainModule uiParticleMain = listUiParticles[0].main;
                     uiParticleMain.maxParticles = uiParticleStruct.NumberParticle;
+
+                    ParticleSystem.ShapeModule uiParticleShape = listUiParticles[0].shape;
+                    uiParticleShape.radius = uiParticleStruct.BaseRadius
+                        + uiParticleStruct.Spread * 0.5f;
+
+                    ParticleSystem.VelocityOverLifetimeModule uiParticleVelocityOverLifetime
+                        = listUiParticles[0].velocityOverLifetime;
+                    uiParticleVelocityOverLifetime.radialMultiplier
+                        = uiParticleStruct.BaseRadialmultipler - uiParticleStruct.Spread;
 
                     if (listUiParticles[0].TryGetComponent(out ParticleSystemRenderer particleSystemRenderer))
                         particleSystemRenderer.material = uiParticleStruct.ParticleMaterial[x];
@@ -105,6 +147,17 @@ public class ParticleMoveToMeter : MonoBehaviour
             particle = Instantiate(uiParticleStruct.UiParticle, transform);
             particle.SetActive(false);
             uiParticleStruct.UiParticlePool.Enqueue(particle);
+        }
+    }
+
+    private void AddUiPressedParticle(int amout)
+    {
+        for (int i = 0; i < amout; i++)
+        {
+            GameObject particle;
+            particle = Instantiate(uiParticleStruct.UiPressedParticle, transform);
+            particle.SetActive(false);
+            uiParticleStruct.UiPressedParticlePool.Enqueue(particle);
         }
     }
 
