@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System.Collections;
 
 //suppress null default warning
 #pragma warning disable 0649
@@ -67,6 +68,12 @@ public class ParticleMoveToMeter : MonoBehaviour
         }
     }
 
+    IEnumerator PutBackToPool(GameObject gameObjectToPool)
+    {
+        yield return new WaitForSeconds(1);
+        uiParticleStruct.UiPressedParticlePool.Enqueue(gameObjectToPool);
+    }
+
     public void ClickEmitParticle(Button btn)
     {
         //create some UiParticle if dont have enough
@@ -85,9 +92,12 @@ public class ParticleMoveToMeter : MonoBehaviour
 
         pressParticle.transform.position = btn.transform.position;
 
-        //set number particle to emit, material display and play it
         if (pressParticle.TryGetComponent(out Coffee.UIExtensions.UIParticle uIPressedParticle))
+        {
             uIPressedParticle.Play();
+
+            StartCoroutine(PutBackToPool(pressParticle));
+        }
 
         for (int j = 0; j < uiParticleStruct.Target.Length; j++)
         {
