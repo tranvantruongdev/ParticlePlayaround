@@ -7,29 +7,26 @@ using DG.Tweening;
 #pragma warning disable 0649
 public class ParticleMoveToMeter : MonoBehaviour
 {
-    [SerializeField] private GameObject uiParticle;
-    [SerializeField] private Button[] buttons;
-    [SerializeField] private GameObject[] target;
-    [SerializeField] private Material[] particleMaterial;
+    [Tooltip("Struct holds infomation about uiParticle")]
+    [SerializeField]
+    private UiParticleStruct uiParticleStruct = new UiParticleStruct();
 
-    private UiParticleStruct uiParticleStruct = new UiParticleStruct(
-        Ease.OutQuad, 5, 1, 300, new Queue<GameObject>()
-        );
-
-    void Start()
+    private void Start()
     {
-        for (int i = 0; i < buttons.Length; i++)
+        uiParticleStruct.UiParticlePool = new Queue<GameObject>();
+
+        for (int i = 0; i < uiParticleStruct.Buttons.Length; i++)
         {
             //get closure value from for loop and pass to anonymous lamda function
             int x = i;
-            buttons[x].onClick.AddListener(() => ClickEmitParticle(buttons[x]));
+            uiParticleStruct.Buttons[x].onClick.AddListener(() => ClickEmitParticle(uiParticleStruct.Buttons[x]));
         }
 
         InvokeRepeating(nameof(CleanUiParticleOvertime),
             uiParticleStruct.CleaningInterval, uiParticleStruct.CleaningInterval);
     }
 
-    void CleanUiParticleOvertime()
+    private void CleanUiParticleOvertime()
     {
         for (int i = 0; i < uiParticleStruct.UiParticlePool.Count; i++)
         {
@@ -43,11 +40,11 @@ public class ParticleMoveToMeter : MonoBehaviour
 
     private void OnDestroy()
     {
-        for (int i = 0; i < buttons.Length; i++)
+        for (int i = 0; i < uiParticleStruct.Buttons.Length; i++)
         {
             //get closure value from for loop and pass to anonymous lamda function
             int x = i;
-            buttons[x].onClick.RemoveListener(() => ClickEmitParticle(buttons[x]));
+            uiParticleStruct.Buttons[x].onClick.RemoveListener(() => ClickEmitParticle(uiParticleStruct.Buttons[x]));
         }
     }
 
@@ -56,10 +53,10 @@ public class ParticleMoveToMeter : MonoBehaviour
         //create some UiParticle if dont have enough
         if (!CheckUiParticle())
         {
-            AddUiParticle(target.Length - uiParticleStruct.UiParticlePool.Count);
+            AddUiParticle(uiParticleStruct.Target.Length - uiParticleStruct.UiParticlePool.Count);
         }
 
-        for (int j = 0; j < target.Length; j++)
+        for (int j = 0; j < uiParticleStruct.Target.Length; j++)
         {
             if (uiParticleStruct.UiParticlePool.Count > 0)
             {
@@ -80,17 +77,17 @@ public class ParticleMoveToMeter : MonoBehaviour
                     uiParticleMain.maxParticles = uiParticleStruct.NumberParticle;
 
                     if (listUiParticles[0].TryGetComponent(out ParticleSystemRenderer particleSystemRenderer))
-                        particleSystemRenderer.material = particleMaterial[x];
+                        particleSystemRenderer.material = uiParticleStruct.ParticleMaterial[x];
 
                     uIParticle.Play();
                 }
 
                 //move uiParticle object to target position within duration time with ease type
-                particle.transform.DOMove(target[j].transform.position, uiParticleStruct.Duration)
+                particle.transform.DOMove(uiParticleStruct.Target[j].transform.position, uiParticleStruct.Duration)
                 .SetEase(uiParticleStruct.Ease)
                 .OnComplete(() =>
                 {
-                    if (target[x].TryGetComponent(out Animation animation))
+                    if (uiParticleStruct.Target[x].TryGetComponent(out Animation animation))
                         animation.Play();
 
                     particle.SetActive(false);
@@ -105,7 +102,7 @@ public class ParticleMoveToMeter : MonoBehaviour
         for (int i = 0; i < amout; i++)
         {
             GameObject particle;
-            particle = Instantiate(uiParticle, transform);
+            particle = Instantiate(uiParticleStruct.UiParticle, transform);
             particle.SetActive(false);
             uiParticleStruct.UiParticlePool.Enqueue(particle);
         }
@@ -113,6 +110,6 @@ public class ParticleMoveToMeter : MonoBehaviour
 
     private bool CheckUiParticle()
     {
-        return uiParticleStruct.UiParticlePool.Count >= target.Length;
+        return uiParticleStruct.UiParticlePool.Count >= uiParticleStruct.Target.Length;
     }
 }
