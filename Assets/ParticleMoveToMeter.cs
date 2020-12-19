@@ -14,6 +14,7 @@ public class ParticleMoveToMeter : MonoBehaviour
 
     private void Start()
     {
+        //allocate some pool
         uiParticleStruct.UiParticlePool = new Queue<GameObject>();
         uiParticleStruct.UiPressedParticlePool = new Queue<GameObject>();
 
@@ -23,7 +24,8 @@ public class ParticleMoveToMeter : MonoBehaviour
         //prewarm some uiPressedParticle
         AddUiPressedParticle(uiParticleStruct.NumberPrewarmParticle);
 
-        for (int i = 0; i < uiParticleStruct.Buttons.Length; i++)
+        int length = uiParticleStruct.Buttons.Length;
+        for (int i = 0; i < length; i++)
         {
             //get closure value from for loop and pass to anonymous lamda function
             int x = i;
@@ -60,7 +62,8 @@ public class ParticleMoveToMeter : MonoBehaviour
 
     private void OnDestroy()
     {
-        for (int i = 0; i < uiParticleStruct.Buttons.Length; i++)
+        int length = uiParticleStruct.Buttons.Length;
+        for (int i = 0; i < length; i++)
         {
             //get closure value from for loop and pass to anonymous lamda function
             int x = i;
@@ -71,6 +74,7 @@ public class ParticleMoveToMeter : MonoBehaviour
     IEnumerator PutBackToPool(GameObject gameObjectToPool)
     {
         yield return new WaitForSeconds(1);
+        gameObjectToPool.gameObject.SetActive(false);
         uiParticleStruct.UiPressedParticlePool.Enqueue(gameObjectToPool);
     }
 
@@ -99,7 +103,8 @@ public class ParticleMoveToMeter : MonoBehaviour
             StartCoroutine(PutBackToPool(pressParticle));
         }
 
-        for (int j = 0; j < uiParticleStruct.Target.Length; j++)
+        int length = uiParticleStruct.Target.Length;
+        for (int j = 0; j < length; j++)
         {
             if (uiParticleStruct.UiParticlePool.Count > 0)
             {
