@@ -24,8 +24,7 @@ public class ParticleMoveToMeter : MonoBehaviour
         //prewarm some uiPressedParticle
         AddUiPressedParticle(uiParticleStruct.NumberPrewarmParticle);
 
-        int length = uiParticleStruct.Buttons.Length;
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < uiParticleStruct.Buttons.Length; i++)
         {
             //get closure value from for loop and pass to anonymous lamda function
             int x = i;
@@ -62,8 +61,7 @@ public class ParticleMoveToMeter : MonoBehaviour
 
     private void OnDestroy()
     {
-        int length = uiParticleStruct.Buttons.Length;
-        for (int i = 0; i < length; i++)
+        for (int i = 0; i < uiParticleStruct.Buttons.Length; i++)
         {
             //get closure value from for loop and pass to anonymous lamda function
             int x = i;
@@ -103,8 +101,7 @@ public class ParticleMoveToMeter : MonoBehaviour
             StartCoroutine(PutBackToPool(pressParticle));
         }
 
-        int length = uiParticleStruct.Target.Length;
-        for (int j = 0; j < length; j++)
+        for (int j = 0; j < uiParticleStruct.Target.Length; j++)
         {
             if (uiParticleStruct.UiParticlePool.Count > 0)
             {
