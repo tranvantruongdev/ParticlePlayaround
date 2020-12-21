@@ -277,23 +277,20 @@ MonoBehaviour:
     StartPos: {fileID: 342873875}
     EndPos: {fileID: 2007302943}
     ParObj: {fileID: 0}
-    ParSys: {fileID: 8239399992757106727, guid: fc77a14c35fb56f4086a956dd5abf93d, type: 3}
-    PressedParSys: {fileID: 2311852795701572267, guid: e5e8d1f66e2d01b4fa15f98dbc2d7085, type: 3}
     RunBool: 0
     time: 1.23
     speed: 0
-    CleaningInterval: 7
+    CleaningInterval: 5
   - Btn: {fileID: 277267581}
     StartPos: {fileID: 2007302943}
     EndPos: {fileID: 342873875}
     ParObj: {fileID: 0}
-    ParSys: {fileID: 8239399992757106727, guid: fc77a14c35fb56f4086a956dd5abf93d, type: 3}
-    PressedParSys: {fileID: 2311852795701572267, guid: e5e8d1f66e2d01b4fa15f98dbc2d7085, type: 3}
     RunBool: 0
     time: 5
     speed: 0
     CleaningInterval: 0
   ParticlePrefab: {fileID: 2415011071018215038, guid: 82059c5103ca4fc48b59b4978f3b40c6, type: 3}
+  ParticleIdlePrefab: {fileID: 2311852795701572264, guid: e5e8d1f66e2d01b4fa15f98dbc2d7085, type: 3}
   CanvasPar: {fileID: 350273532}
 --- !u!4 &297128090
 Transform:
