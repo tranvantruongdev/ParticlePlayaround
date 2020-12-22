@@ -176,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -274,7 +275,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParStruct2:
   - Btn:
-    - {fileID: 359806760}
+    - {fileID: 277267581}
+    - {fileID: 1568306901}
     StartPos: {fileID: 342873875}
     EndPos: {fileID: 2007302943}
     ParObj: {fileID: 0}
@@ -283,23 +285,12 @@ MonoBehaviour:
     speed: 0
     ParticlePrefab: {fileID: 2415011071018215038, guid: 82059c5103ca4fc48b59b4978f3b40c6, type: 3}
   - Btn:
-    - {fileID: 277267581}
-    StartPos: {fileID: 2007302943}
-    EndPos: {fileID: 342873875}
-    ParObj: {fileID: 0}
-    RunBool: 0
-    time: 2.53
-    speed: 0
-    ParticlePrefab: {fileID: 2415011071018215038, guid: 82059c5103ca4fc48b59b4978f3b40c6, type: 3}
-  - Btn:
-    - {fileID: 277267581}
     - {fileID: 1568306901}
-    - {fileID: 359806760}
     StartPos: {fileID: 342873875}
     EndPos: {fileID: 342873875}
     ParObj: {fileID: 0}
     RunBool: 0
-    time: 3.4
+    time: 1.23
     speed: 0
     ParticlePrefab: {fileID: 39582071121565261, guid: 1154fedd5fc39d64a91293b716cd4ed8, type: 3}
   CanvasPar: {fileID: 350273532}
@@ -329,6 +320,7 @@ GameObject:
   - component: {fileID: 342873875}
   - component: {fileID: 342873877}
   - component: {fileID: 342873876}
+  - component: {fileID: 342873878}
   m_Layer: 5
   m_Name: start pos
   m_TagString: Untagged
@@ -393,6 +385,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 342873874}
   m_CullTransparentMesh: 0
+--- !u!111 &342873878
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 342873874}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &350273532
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +459,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &350273535
 Canvas:
   m_ObjectHideFlags: 0
@@ -550,6 +559,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -815,6 +825,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1037,6 +1048,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1376151705
@@ -1189,6 +1201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Navigation:
     m_Mode: 3
+    m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
@@ -1425,6 +1438,7 @@ GameObject:
   - component: {fileID: 2007302943}
   - component: {fileID: 2007302945}
   - component: {fileID: 2007302944}
+  - component: {fileID: 2007302946}
   m_Layer: 5
   m_Name: end pos
   m_TagString: Untagged
@@ -1489,3 +1503,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007302942}
   m_CullTransparentMesh: 0
+--- !u!111 &2007302946
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007302942}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0

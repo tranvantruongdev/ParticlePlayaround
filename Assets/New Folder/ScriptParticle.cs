@@ -27,6 +27,7 @@ public class ScriptParticle : MonoBehaviour
     List<ParticleStruct> ListObjPar = new List<ParticleStruct>();
     List<ParticleStruct> ListObjAvail = new List<ParticleStruct>();
 
+ 
     private void Start()
     {
         foreach (var item in ParStruct2)
@@ -45,7 +46,7 @@ public class ScriptParticle : MonoBehaviour
 
     public void ClearingPar()
     {
-        for (int i = 1; i < ListObjAvail.Count; i++)
+        for (int i = 0; i < ListObjAvail.Count; i++)
         {
             Destroy(ListObjAvail[i].ParObj);
             ListObjAvail.RemoveAt(i);
@@ -67,9 +68,21 @@ public class ScriptParticle : MonoBehaviour
                 {
                     if (!parSys.isPlaying)
                     {
+                        if (ListObjPar[i].EndPos.gameObject.TryGetComponent(out Animation animation))
+                        {
+                            animation.Play("popop");
+                        }
+                        if (ListObjPar[i].StartPos.gameObject.TryGetComponent(out Animation anim))
+                        {
+                            if (ListObjPar[i].StartPos != ListObjPar[i].EndPos.gameObject)
+                            {
+                                anim.Play("roundnround");
+                            }
+                        }
+
                         ListObjPar[i].ParObj.SetActive(false);
                         ListObjAvail.Add(ListObjPar[i]);
-                        ListObjPar.Remove(ListObjPar[i]);
+                        ListObjPar.Remove(ListObjPar[i]);                        
                     }
                 }
             }
@@ -99,29 +112,28 @@ public class ScriptParticle : MonoBehaviour
         else
         {
             ParticleStruct itemAvail = ListObjAvail[0];
+            Destroy(itemAvail.ParObj);
 
-            itemAvail.ParObj.SetActive(true);
-            itemAvail.StartPos = item.StartPos;
-            itemAvail.EndPos = item.EndPos;
-            itemAvail.time = item.time;
+            GameObject go = Instantiate(item.ParticlePrefab, CanvasPar.transform, false);
 
-            itemAvail.ParObj.transform.position = item.StartPos.position;
-            itemAvail.RunBool = true;
+            go.transform.position = item.StartPos.position;
+            item.ParObj = go;
+            item.speed = SetUpSpeedParticle(item);
+            item.RunBool = true;
 
-            if (itemAvail.ParObj.TryGetComponent(out ParticleSystem par))
+            if(go.TryGetComponent(out ParticleSystem par))
             {
                 var particleMain = par.main;
                 particleMain.startLifetime = item.time;
                 particleMain.duration = item.time;
                 par.Play();
             }
-
-            itemAvail.speed = SetUpSpeedParticle(itemAvail);
-
-            ListObjPar.Add(itemAvail);
+            ParticleStruct addItem = item;
+            ListObjPar.Add(addItem);
 
             ListObjAvail.Remove(ListObjAvail[0]);
         }
+
     }
 
     public float SetUpSpeedParticle(ParticleStruct par)
