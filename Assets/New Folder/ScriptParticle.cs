@@ -16,31 +16,20 @@ public struct ParticleStruct
     [HideInInspector]
     public float speed;
     public float CleaningInterval;
-
     public GameObject ParticlePrefab;
-
 }
 
 public class ScriptParticle : MonoBehaviour
 {
-    //private const int Seconds = 2;
-    //private const int idleParticleIndex = 0;
     public ParticleStruct[] ParStruct2;
-
-    //public GameObject ParticlePrefab;
-
     public GameObject CanvasPar;
-
     public float GCTime = 5;
 
     List<ParticleStruct> ListObjPar = new List<ParticleStruct>();
     List<ParticleStruct> ListObjAvail = new List<ParticleStruct>();
 
-    //ObjectPooler pooler;
-
     private void Start()
     {
-        //pooler = ObjectPooler.SharedInstance;
         foreach (var item in ParStruct2)
         {
             item.Btn.onClick.AddListener(() =>
@@ -49,8 +38,9 @@ public class ScriptParticle : MonoBehaviour
             });
         }
 
-        InvokeRepeating("ClearingPar", 2, GCTime);       
+        InvokeRepeating(nameof(ClearingPar), 2, GCTime);
     }
+
     public void ClearingPar()
     {
         for (int i = 1; i < ListObjAvail.Count; i++)
@@ -59,6 +49,7 @@ public class ScriptParticle : MonoBehaviour
             ListObjAvail.RemoveAt(i);
         }
     }
+
     private void Update()
     {
         for (int i = 0; i < ListObjPar.Count; i++)
@@ -114,6 +105,7 @@ public class ScriptParticle : MonoBehaviour
 
             itemAvail.ParObj.transform.position = item.StartPos.position;
             itemAvail.RunBool = true;
+
             if (itemAvail.ParObj.TryGetComponent(out ParticleSystem par))
             {
                 var particleMain = par.main;
@@ -133,7 +125,6 @@ public class ScriptParticle : MonoBehaviour
     public float SetUpSpeedParticle(ParticleStruct par)
     {
         return Vector3.Distance(par.StartPos.position, par.EndPos.position) / (par.time + Time.deltaTime);
-
     }
 
 }
