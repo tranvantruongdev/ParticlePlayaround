@@ -6,7 +6,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public struct ParticleStruct
 {
-    public Button Btn;
+    public Button[] Btn;
     public Transform StartPos;
     public Transform EndPos;
     public GameObject ParObj;
@@ -15,7 +15,6 @@ public struct ParticleStruct
     public float time;
     [HideInInspector]
     public float speed;
-    public float CleaningInterval;
     public GameObject ParticlePrefab;
 }
 
@@ -32,10 +31,13 @@ public class ScriptParticle : MonoBehaviour
     {
         foreach (var item in ParStruct2)
         {
-            item.Btn.onClick.AddListener(() =>
+            foreach (var item2 in item.Btn)
             {
-                Click(item);
-            });
+                item2.onClick.AddListener(() =>
+                {
+                    Click(item);
+                });
+            }
         }
 
         InvokeRepeating(nameof(ClearingPar), 2, GCTime);
