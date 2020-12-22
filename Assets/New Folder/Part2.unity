@@ -273,32 +273,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ParStruct2:
-  - Btn: {fileID: 1568306901}
+  - Btn:
+    - {fileID: 359806760}
     StartPos: {fileID: 342873875}
     EndPos: {fileID: 2007302943}
     ParObj: {fileID: 0}
     RunBool: 0
     time: 1.23
     speed: 0
-    CleaningInterval: 5
     ParticlePrefab: {fileID: 2415011071018215038, guid: 82059c5103ca4fc48b59b4978f3b40c6, type: 3}
-  - Btn: {fileID: 277267581}
+  - Btn:
+    - {fileID: 277267581}
     StartPos: {fileID: 2007302943}
     EndPos: {fileID: 342873875}
     ParObj: {fileID: 0}
     RunBool: 0
-    time: 3.57
+    time: 2.53
     speed: 0
-    CleaningInterval: 0
     ParticlePrefab: {fileID: 2415011071018215038, guid: 82059c5103ca4fc48b59b4978f3b40c6, type: 3}
-  - Btn: {fileID: 1568306901}
+  - Btn:
+    - {fileID: 277267581}
+    - {fileID: 1568306901}
+    - {fileID: 359806760}
     StartPos: {fileID: 342873875}
     EndPos: {fileID: 342873875}
     ParObj: {fileID: 0}
     RunBool: 0
-    time: 3.57
+    time: 3.4
     speed: 0
-    CleaningInterval: 0
     ParticlePrefab: {fileID: 39582071121565261, guid: 1154fedd5fc39d64a91293b716cd4ed8, type: 3}
   CanvasPar: {fileID: 350273532}
   GCTime: 5
