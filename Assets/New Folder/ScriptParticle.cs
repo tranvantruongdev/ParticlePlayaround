@@ -16,25 +16,31 @@ public struct ParticleStruct
     [HideInInspector]
     public float speed;
     public float CleaningInterval;
+
+    public GameObject ParticlePrefab;
+
 }
 
 public class ScriptParticle : MonoBehaviour
 {
+    //private const int Seconds = 2;
+    //private const int idleParticleIndex = 0;
     public ParticleStruct[] ParStruct2;
 
-    public GameObject ParticlePrefab;
-    public GameObject ParticleIdlePrefab;
+    //public GameObject ParticlePrefab;
 
     public GameObject CanvasPar;
+
+    public float GCTime = 5;
 
     List<ParticleStruct> ListObjPar = new List<ParticleStruct>();
     List<ParticleStruct> ListObjAvail = new List<ParticleStruct>();
 
-    List<ParticleStruct> ListIdleObjPar = new List<ParticleStruct>();
-    List<ParticleStruct> ListIdleObjAvail = new List<ParticleStruct>();
+    //ObjectPooler pooler;
 
     private void Start()
     {
+        //pooler = ObjectPooler.SharedInstance;
         foreach (var item in ParStruct2)
         {
             item.Btn.onClick.AddListener(() =>
@@ -42,30 +48,36 @@ public class ScriptParticle : MonoBehaviour
                 Click(item);
             });
         }
-        InvokeRepeating(nameof(CleanUiParticleOvertime), ParStruct2[0].CleaningInterval,
-            ParStruct2[0].CleaningInterval);
-    }
 
+        InvokeRepeating("ClearingPar", 2, GCTime);       
+    }
+    public void ClearingPar()
+    {
+        for (int i = 1; i < ListObjAvail.Count; i++)
+        {
+            Destroy(ListObjAvail[i].ParObj);
+            ListObjAvail.RemoveAt(i);
+        }
+    }
     private void Update()
     {
         for (int i = 0; i < ListObjPar.Count; i++)
         {
-            if (ListObjPar[i].RunBool && ListObjPar[i].ParObj != null)
+            if (ListObjPar[i].RunBool)
             {
                 ListObjPar[i].ParObj.transform.position = Vector3.MoveTowards(
                     ListObjPar[i].ParObj.transform.position,
                     ListObjPar[i].EndPos.position,
-                    ListObjPar[i].time * Time.deltaTime * 10);
+                    ListObjPar[i].speed * Time.deltaTime);
 
-                if (ListObjPar[i].ParObj.transform.position == ListObjPar[i].EndPos.position)
+                if (ListObjPar[i].ParObj.TryGetComponent(out ParticleSystem parSys))
                 {
-                    ParticleStruct item = ListObjPar[i];
-                    item.RunBool = false;
-                    item.ParObj.SetActive(false);
-                    ListObjPar[i] = item;
-
-                    ListObjAvail.Add(item);
-                    ListObjPar.Remove(ListObjPar[i]);
+                    if (!parSys.isPlaying)
+                    {
+                        ListObjPar[i].ParObj.SetActive(false);
+                        ListObjAvail.Add(ListObjPar[i]);
+                        ListObjPar.Remove(ListObjPar[i]);
+                    }
                 }
             }
         }
@@ -73,32 +85,23 @@ public class ScriptParticle : MonoBehaviour
 
     public void Click(ParticleStruct item)
     {
-        if (ListIdleObjAvail.Count == 0)
-        {
-            GameObject go2 = Instantiate(ParticleIdlePrefab, CanvasPar.transform, false);
-            go2.transform.position = item.StartPos.position;
-            go2.SetActive(true);
-            item.ParObj = go2;
-            ListIdleObjPar.Add(item);
-        }
-        else
-        {
-            ParticleStruct itemAvail2 = ListIdleObjAvail[0];
-            itemAvail2.ParObj.SetActive(true);
-
-            itemAvail2.ParObj.transform.position = item.StartPos.position;
-
-            ListObjPar.Add(itemAvail2);
-            ListObjAvail.Remove(ListObjAvail[0]);
-        }
-
         if (ListObjAvail.Count == 0)
         {
-            GameObject go = Instantiate(ParticlePrefab, CanvasPar.transform, false);
+            GameObject go = Instantiate(item.ParticlePrefab, CanvasPar.transform, false);
+
             go.transform.position = item.StartPos.position;
             item.ParObj = go;
+            item.speed = SetUpSpeedParticle(item);
             item.RunBool = true;
-            ListObjPar.Add(item);
+            if (go.TryGetComponent(out ParticleSystem par))
+            {
+                var particleMain = par.main;
+                particleMain.startLifetime = item.time;
+                particleMain.duration = item.time;
+                par.Play();
+            }
+            ParticleStruct addItem = item;
+            ListObjPar.Add(addItem);
         }
         else
         {
@@ -111,24 +114,26 @@ public class ScriptParticle : MonoBehaviour
 
             itemAvail.ParObj.transform.position = item.StartPos.position;
             itemAvail.RunBool = true;
+            if (itemAvail.ParObj.TryGetComponent(out ParticleSystem par))
+            {
+                var particleMain = par.main;
+                particleMain.startLifetime = item.time;
+                particleMain.duration = item.time;
+                par.Play();
+            }
+
+            itemAvail.speed = SetUpSpeedParticle(itemAvail);
 
             ListObjPar.Add(itemAvail);
+
             ListObjAvail.Remove(ListObjAvail[0]);
         }
     }
 
-    private void CleanUiParticleOvertime()
+    public float SetUpSpeedParticle(ParticleStruct par)
     {
-        if (ListObjAvail.Count > 1)
-        {
-            for (int i = 1; i < ListObjAvail.Count; i++)
-            {
-                if (ListObjAvail[i].ParObj != null && ListObjAvail[i].ParObj.activeSelf == false && ListObjAvail[i].RunBool == false)
-                {
-                    Destroy(ListObjAvail[i].ParObj.gameObject);
-                    ListObjAvail.Remove(ListObjAvail[i]);
-                }
-            }
-        }
+        return Vector3.Distance(par.StartPos.position, par.EndPos.position) / (par.time + Time.deltaTime);
+
     }
+
 }
