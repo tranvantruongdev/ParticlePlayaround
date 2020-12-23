@@ -27,10 +27,15 @@ public struct ParticleStruct
 public class AnimationController
 {
     public string animationName;
-    public Animation[] anim;
-    //[Space]
+    public AnimationClip anim;
+    public GameObject ObjAnim;
 
-    //public AnimationClip[] clip;
+    public void SetUpAnimation()
+    {
+        Animation  aniObj = ObjAnim.GetComponent<Animation>();
+        aniObj.clip = anim;
+        aniObj.AddClip(anim,anim.name);
+    }
 }
 
 public class ScriptParticle : MonoBehaviour
@@ -41,7 +46,7 @@ public class ScriptParticle : MonoBehaviour
     readonly List<ParticleStruct> ListObjPar = new List<ParticleStruct>();
     readonly List<ParticleStruct> ListObjAvail = new List<ParticleStruct>();
 
-    public AnimationController[] animController;
+    public AnimationController[] AnimController;
     private void Start()
     {
         foreach (var item in ParStruct2)
@@ -53,6 +58,11 @@ public class ScriptParticle : MonoBehaviour
                     Click(item);
                 });
             }
+        }
+
+        for (int i = 0; i < AnimController.Length; i++)
+        {
+            AnimController[i].SetUpAnimation();
         }
 
         InvokeRepeating(nameof(ClearingPar), 2, GCTime);
@@ -82,37 +92,13 @@ public class ScriptParticle : MonoBehaviour
                 {
                     if (!parSys.isPlaying)
                     {
-                        if (ListObjPar[i].EndPos != ListObjPar[i].StartPos)
-                        {
-                            for (int j = 0; j < animController.Length; j++)
-                            {
-                                if (animController[j].animationName == "Pop")
-                                {
-                                    for (int k = 0; k < animController[j].anim.Length; k++)
-                                    {
-                                        animController[j].anim[k].Play();
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            for (int j = 0; j < animController.Length; j++)
-                            {
-                                if (animController[j].animationName == "Rotation")
-                                {
-                                    for (int k = 0; k < animController[j].anim.Length; k++)
-                                    {
-                                        animController[j].anim[k].Play();
-                                    }
-                                }
-                            }
-                        }
+                        ListObjPar[i].EndPos.gameObject.GetComponent<Animation>().Play();
 
                         ListObjPar[i].ParObj.SetActive(false);
                         ListObjAvail.Add(ListObjPar[i]);
                         ListObjPar.Remove(ListObjPar[i]);
                     }
+
                 }
             }
         }
@@ -135,6 +121,7 @@ public class ScriptParticle : MonoBehaviour
                 particleMain.duration = item.time;
                 par.Play();
             }
+
             ParticleStruct addItem = item;
             ListObjPar.Add(addItem);
         }
