@@ -7,14 +7,19 @@ using UnityEngine.UI;
 public struct ParticleStruct
 {
     public Button[] Btn;
+
     public Transform StartPos;
     public Transform EndPos;
+
     public GameObject ParObj;
+
     public bool RunBool;
+
     [Range(0.1f, 5.0f)]
     public float time;
     [HideInInspector]
     public float speed;
+
     public GameObject ParticlePrefab;
 }
 
@@ -23,11 +28,10 @@ public class ScriptParticle : MonoBehaviour
     public ParticleStruct[] ParStruct2;
     public GameObject CanvasPar;
     public float GCTime = 5;
+    readonly List<ParticleStruct> ListObjPar = new List<ParticleStruct>();
+    readonly List<ParticleStruct> ListObjAvail = new List<ParticleStruct>();
 
-    List<ParticleStruct> ListObjPar = new List<ParticleStruct>();
-    List<ParticleStruct> ListObjAvail = new List<ParticleStruct>();
 
- 
     private void Start()
     {
         foreach (var item in ParStruct2)
@@ -70,19 +74,14 @@ public class ScriptParticle : MonoBehaviour
                     {
                         if (ListObjPar[i].EndPos.gameObject.TryGetComponent(out Animation animation))
                         {
-                            animation.Play("popop");
+                            if (ListObjPar[i].StartPos != ListObjPar[i].EndPos)
+                                animation.Play("popop");
+                            else
+                                animation.Play("roundnround");
                         }
-                        if (ListObjPar[i].StartPos.gameObject.TryGetComponent(out Animation anim))
-                        {
-                            if (ListObjPar[i].StartPos != ListObjPar[i].EndPos.gameObject)
-                            {
-                                anim.Play("roundnround");
-                            }
-                        }
-
                         ListObjPar[i].ParObj.SetActive(false);
                         ListObjAvail.Add(ListObjPar[i]);
-                        ListObjPar.Remove(ListObjPar[i]);                        
+                        ListObjPar.Remove(ListObjPar[i]);
                     }
                 }
             }
@@ -121,7 +120,7 @@ public class ScriptParticle : MonoBehaviour
             item.speed = SetUpSpeedParticle(item);
             item.RunBool = true;
 
-            if(go.TryGetComponent(out ParticleSystem par))
+            if (go.TryGetComponent(out ParticleSystem par))
             {
                 var particleMain = par.main;
                 particleMain.startLifetime = item.time;
@@ -133,7 +132,6 @@ public class ScriptParticle : MonoBehaviour
 
             ListObjAvail.Remove(ListObjAvail[0]);
         }
-
     }
 
     public float SetUpSpeedParticle(ParticleStruct par)

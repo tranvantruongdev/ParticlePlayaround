@@ -13,6 +13,7 @@ namespace UnityEngine.UI.Extensions.Examples.FancyScrollViewExample09
 {
     static class TextureLoader
     {
+        [Obsolete]
         public static void Load(string url, Action<(string Url, Texture Texture)> onSuccess) =>
             Loader.Instance.Load(url, onSuccess);
 
@@ -26,6 +27,7 @@ namespace UnityEngine.UI.Extensions.Examples.FancyScrollViewExample09
                 (instance = FindObjectOfType<Loader>() ??
                     new GameObject(typeof(TextureLoader).Name).AddComponent<Loader>());
 
+            [Obsolete]
             public void Load(string url, Action<(string Url, Texture Texture)> onSuccess)
             {
                 if (cache.TryGetValue(url, out var cachedTexture))
@@ -41,6 +43,7 @@ namespace UnityEngine.UI.Extensions.Examples.FancyScrollViewExample09
                 }));
             }
 
+            [Obsolete]
             IEnumerator DownloadTexture(string url, Action<(string Url, Texture Texture)> onSuccess)
             {
                 using (var request = UnityWebRequestTexture.GetTexture(url))

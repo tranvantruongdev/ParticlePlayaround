@@ -21,7 +21,10 @@ namespace UnityEngine.UI.Extensions.Examples.FancyScrollViewExample09
 
         ItemData data;
 
+        [System.Obsolete]
+#pragma warning disable CS0809 // Obsolete member overrides non-obsolete member
         public override void UpdateContent(ItemData itemData)
+#pragma warning restore CS0809 // Obsolete member overrides non-obsolete member
         {
             data = itemData;
             image.texture = null;
