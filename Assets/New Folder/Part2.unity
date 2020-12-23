@@ -281,7 +281,7 @@ MonoBehaviour:
     EndPos: {fileID: 2007302943}
     ParObj: {fileID: 0}
     RunBool: 0
-    time: 1.23
+    time: 2
     speed: 0
     ParticlePrefab: {fileID: 2415011071018215038, guid: 82059c5103ca4fc48b59b4978f3b40c6, type: 3}
   - Btn:
@@ -290,11 +290,18 @@ MonoBehaviour:
     EndPos: {fileID: 342873875}
     ParObj: {fileID: 0}
     RunBool: 0
-    time: 1.23
+    time: 1
     speed: 0
     ParticlePrefab: {fileID: 39582071121565261, guid: 1154fedd5fc39d64a91293b716cd4ed8, type: 3}
   CanvasPar: {fileID: 350273532}
   GCTime: 5
+  animController:
+    anim:
+    - {fileID: 342873878}
+    - {fileID: 2007302946}
+    clip:
+    - {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
+    - {fileID: 7400000, guid: 5b0f908e59a6e784fbcb3251d82c20cc, type: 2}
 --- !u!4 &297128090
 Transform:
   m_ObjectHideFlags: 0
@@ -394,9 +401,8 @@ Animation:
   m_GameObject: {fileID: 342873874}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: 5b0f908e59a6e784fbcb3251d82c20cc, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
   - {fileID: 7400000, guid: 5b0f908e59a6e784fbcb3251d82c20cc, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
@@ -1513,10 +1519,9 @@ Animation:
   m_GameObject: {fileID: 2007302942}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
-  - {fileID: 7400000, guid: 5b0f908e59a6e784fbcb3251d82c20cc, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0

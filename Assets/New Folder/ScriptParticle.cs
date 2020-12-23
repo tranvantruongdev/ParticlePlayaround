@@ -23,6 +23,16 @@ public struct ParticleStruct
     public GameObject ParticlePrefab;
 }
 
+[System.Serializable]
+public class AnimationController
+{
+    public string animationName;
+    public Animation[] anim;
+    //[Space]
+    
+    //public AnimationClip[] clip;
+}
+
 public class ScriptParticle : MonoBehaviour
 {
     public ParticleStruct[] ParStruct2;
@@ -31,7 +41,7 @@ public class ScriptParticle : MonoBehaviour
     readonly List<ParticleStruct> ListObjPar = new List<ParticleStruct>();
     readonly List<ParticleStruct> ListObjAvail = new List<ParticleStruct>();
 
-
+    public AnimationController[] animController;
     private void Start()
     {
         foreach (var item in ParStruct2)
@@ -72,13 +82,25 @@ public class ScriptParticle : MonoBehaviour
                 {
                     if (!parSys.isPlaying)
                     {
-                        if (ListObjPar[i].EndPos.gameObject.TryGetComponent(out Animation animation))
-                        {
-                            if (ListObjPar[i].StartPos != ListObjPar[i].EndPos)
-                                animation.Play("popop");
-                            else
-                                animation.Play("roundnround");
-                        }
+                        //if (ListObjPar[i].EndPos.gameObject.TryGetComponent(out Animation animation))
+                        //        animation.Play();
+
+                        //for (int j = 0; j < animController.anim.Length; j++)
+                        //{
+                        //    //if (ListObjPar[i].EndPos != ListObjPar[i].StartPos)
+                        //    //{
+                        //        if (animController.anim[j].gameObject.name == ListObjPar[i].EndPos.gameObject.name)
+                        //        {
+
+                        //            animController.anim[j].Play();
+                        //        }
+                        //    //}
+                        //    //else
+                        //    //{
+                        //    //    animController.anim[0].Play();
+                        //    //}
+                        //}
+
                         ListObjPar[i].ParObj.SetActive(false);
                         ListObjAvail.Add(ListObjPar[i]);
                         ListObjPar.Remove(ListObjPar[i]);
@@ -138,5 +160,4 @@ public class ScriptParticle : MonoBehaviour
     {
         return Vector3.Distance(par.StartPos.position, par.EndPos.position) / (par.time + Time.deltaTime);
     }
-
 }
