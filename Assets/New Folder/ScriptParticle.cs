@@ -1,42 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
-[System.Serializable]
-public struct ParticleStruct
-{
-    public Button[] Btn;
-
-    public Transform StartPos;
-    public Transform EndPos;
-
-    public GameObject ParObj;
-
-    public bool RunBool;
-
-    [Range(0.1f, 5.0f)]
-    public float time;
-    [HideInInspector]
-    public float speed;
-
-    public GameObject ParticlePrefab;
-}
-
-[System.Serializable]
-public class AnimationController
-{
-    public string animationName;
-    public AnimationClip anim;
-    public GameObject ObjAnim;
-
-    public void SetUpAnimation()
-    {
-        Animation  aniObj = ObjAnim.GetComponent<Animation>();
-        aniObj.clip = anim;
-        aniObj.AddClip(anim,anim.name);
-    }
-}
 
 public class ScriptParticle : MonoBehaviour
 {
