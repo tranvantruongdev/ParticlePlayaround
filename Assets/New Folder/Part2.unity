@@ -296,12 +296,12 @@ MonoBehaviour:
   CanvasPar: {fileID: 350273532}
   GCTime: 5
   animController:
+  - animationName: Rotation
     anim:
     - {fileID: 342873878}
+  - animationName: Pop
+    anim:
     - {fileID: 2007302946}
-    clip:
-    - {fileID: 7400000, guid: bc6649ec35a78fa41a58c48cb252e0d2, type: 2}
-    - {fileID: 7400000, guid: 5b0f908e59a6e784fbcb3251d82c20cc, type: 2}
 --- !u!4 &297128090
 Transform:
   m_ObjectHideFlags: 0
