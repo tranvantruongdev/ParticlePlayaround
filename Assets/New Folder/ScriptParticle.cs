@@ -10,6 +10,7 @@ public class ScriptParticle : MonoBehaviour
     readonly List<ParticleStruct> ListObjAvail = new List<ParticleStruct>();
 
     public AnimationController[] AnimController;
+
     private void Start()
     {
         foreach (var item in ParStruct2)
@@ -82,6 +83,8 @@ public class ScriptParticle : MonoBehaviour
                 var particleMain = par.main;
                 particleMain.startLifetime = item.time;
                 particleMain.duration = item.time;
+                var radialOverTime = par.velocityOverLifetime;
+                radialOverTime.speedModifier = ParticleStruct.radialMul - item.time;
                 par.Play();
             }
 
@@ -105,6 +108,8 @@ public class ScriptParticle : MonoBehaviour
                 var particleMain = par.main;
                 particleMain.startLifetime = item.time;
                 particleMain.duration = item.time;
+                var radialOverTime = par.velocityOverLifetime;
+                radialOverTime.speedModifier = ParticleStruct.radialMul - item.time;
                 par.Play();
             }
             ParticleStruct addItem = item;

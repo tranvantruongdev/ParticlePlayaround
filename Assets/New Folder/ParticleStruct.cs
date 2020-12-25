@@ -13,10 +13,11 @@ public struct ParticleStruct
 
     public bool RunBool;
 
-    [Range(0.1f, 5.0f)]
+    [Range(1f, 5.0f)]
     public float time;
     [HideInInspector]
     public float speed;
 
     public GameObject ParticlePrefab;
+    public const float radialMul = 6f;
 }
