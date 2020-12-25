@@ -56,7 +56,10 @@ public class ScriptParticle : MonoBehaviour
                 {
                     if (!parSys.isPlaying)
                     {
-                        ListObjPar[i].EndPos.gameObject.GetComponent<Animation>().Play();
+                        if (ListObjPar[i].EndPos.gameObject.TryGetComponent(out Animation anim))
+                        {
+                            anim.Play();
+                        }
 
                         ListObjPar[i].ParObj.SetActive(false);
                         ListObjAvail.Add(ListObjPar[i]);
