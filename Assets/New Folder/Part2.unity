@@ -281,7 +281,7 @@ MonoBehaviour:
     EndPos: {fileID: 2007302943}
     ParObj: {fileID: 0}
     RunBool: 0
-    time: 5
+    time: 2
     speed: 0
     ParticlePrefab: {fileID: 2415011071018215038, guid: 82059c5103ca4fc48b59b4978f3b40c6, type: 3}
   - Btn:
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -402,9 +402,8 @@ Animation:
   m_GameObject: {fileID: 342873874}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 5b0f908e59a6e784fbcb3251d82c20cc, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 5b0f908e59a6e784fbcb3251d82c20cc, type: 2}
+  m_Animation: {fileID: 0}
+  m_Animations: []
   m_WrapMode: 0
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
@@ -1486,7 +1485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1523,6 +1522,6 @@ Animation:
   m_Animation: {fileID: 0}
   m_Animations: []
   m_WrapMode: 0
-  m_PlayAutomatically: 1
+  m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
